@@ -54,22 +54,26 @@ export default function Home() {
     initAutoML();
   }, [])
   return (
-    <div className="w-full max-w-2xl mx-auto relative flex items-center justify-center">
-      <canvas ref={canvasRef} width="640" height="480" className="z-10">
-      </canvas>
-      <video
-        onLoadedMetadata={async () => {
-          const model = await automl.loadObjectDetection('model.json');
-          frame(videoRef.current, model, canvasRef.current);
-        }}
-        autoPlay
-        playsInline
-        muted
-        ref={videoRef}
-        width="640"
-        height="480"
-        className="absolute z-0"
-      />
+    <div className="w-full max-w-2xl mx-auto flex items-center justify-center flex-col">
+      <h1>enable your landscape mode for better experience</h1>
+      <div className="relative w-full mt-4">
+        <canvas ref={canvasRef} width="640" height="480" className="z-10 absolute top-0 left-0 mx-4">
+        </canvas>
+        <video
+          onLoadedMetadata={async () => {
+            const model = await automl.loadObjectDetection('model.json');
+            frame(videoRef.current, model, canvasRef.current);
+          }}
+          autoPlay
+          playsInline
+          muted
+          ref={videoRef}
+          width="640"
+          height="480"
+          className="absolute z-0 top-0 left-0 mx-4"
+        />
+      </div>
+
     </div>
   )
 }
